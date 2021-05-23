@@ -1,3 +1,3 @@
-# Elephant
+# ElephantStorage
 
-A description of this package.
+Better Storage management for iOS. Uses Combine. 
