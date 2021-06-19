@@ -21,9 +21,15 @@ public class ElephantStorage<T: NSManagedObject> {
     
     /// Creates a publisher for a new Object.
     /// - Returns: AnyPublisher with a new Object. No failure
-    public func createNewObject() -> AnyPublisher<T, Never> {
+    public func createNewObjectPublisher() -> AnyPublisher<T, Never> {
         return Just(T(context: self.context))
             .eraseToAnyPublisher()
+    }
+    
+    /// Creates a new Object. Does not save it
+    /// - Returns: NSManagedObject
+    public func createNewObject() -> T {
+        return T(context: self.context)
     }
     
     /// Saves a given object in the context.

@@ -22,6 +22,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>ElephantStorage</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>ElephantTests</key>
 		<dict>
 			<key>primary</key>

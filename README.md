@@ -1,3 +1,3 @@
-# Elephant
+# ElephantStorage
 
-A description of this package.
+Better Storage Management. 
