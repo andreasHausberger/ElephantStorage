@@ -1,3 +1,1 @@
 # ElephantStorage
-
-Better Storage Management. 
