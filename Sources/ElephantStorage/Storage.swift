@@ -15,7 +15,7 @@ public class ElephantStorage<T: NSManagedObject> {
     /// Public init.
     /// - Parameter context: Valid NSManagedObjectContext that can be used to save objects.
     /// - Note: You may want to extend Storage to incorporate a parameter-less convenience init with an existing context.
-    public init (context: NSManagedObjectContext) {
+    public init(context: NSManagedObjectContext) {
         self.context = context
     }
     
