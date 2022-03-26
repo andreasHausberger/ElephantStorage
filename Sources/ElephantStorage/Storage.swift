@@ -116,5 +116,50 @@ public class ElephantStorage<T: NSManagedObject> {
     private func publish<R>(_ resolution: @escaping (Future<R, StorageError>.Promise) -> ())->AnyPublisher<R, StorageError> {
         Future(resolution).eraseToAnyPublisher()
     }
+}
+
+extension ElephantStorage {
+    
+    func saveObject(object: T, isUpdate: Bool) async throws -> T {
+        do {
+            if !isUpdate {
+                self.context.insert(object)
+            }
+            try self.context.save()
+            return object
+        }
+        catch {
+            throw StorageError.WriteError
+        }
+    }
+    
+    func deleteObject(object: T) async throws -> T {
+        do {
+            self.context.delete(object)
+            try self.context.save()
+            return object
+        }
+        catch {
+            throw StorageError.DeleteError
+        }
+    }
+    
+    func getAllObjects(entityName: String) async throws -> [T] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        guard let results = try? self.context.fetch(request) else { throw StorageError.ReadError }
+        guard let objects = results as? [T] else { throw StorageError.NotFoundError }
+        
+        return objects
+    }
+    
+    func getObjects(with predicate: NSPredicate, entityName: String) async throws -> [T] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        request.predicate = predicate
+        guard let results = try? self.context.fetch(request) else { throw StorageError.ReadError }
+        guard let objects = results as? [T] else { throw StorageError.NotFoundError }
+        
+        return objects
+    }
+    
     
 }
